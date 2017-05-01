@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsarTales.Web", "PulsarTales.Web\PulsarTales.Web.csproj", "{32923228-B3B4-4564-B4AC-C19142CFF4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsarTales.UnitTests", "PulsarTales.UnitTests\PulsarTales.UnitTests.csproj", "{37B0520E-C122-41BB-98E0-130A3D851DF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsarTales.Data", "PulsarTales.Data\PulsarTales.Data.csproj", "{2C4CE67D-B056-458B-844B-7CF48CB08324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsarTales.Models", "PulsarTales.Models\PulsarTales.Models.csproj", "{3DC9A8F1-B323-47F2-A458-483C0369820F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsarTales.Services", "PulsarTales.Services\PulsarTales.Services.csproj", "{06FF4BCF-6DC4-4674-8911-6D4A7CE9DCD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32923228-B3B4-4564-B4AC-C19142CFF4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32923228-B3B4-4564-B4AC-C19142CFF4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32923228-B3B4-4564-B4AC-C19142CFF4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32923228-B3B4-4564-B4AC-C19142CFF4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B0520E-C122-41BB-98E0-130A3D851DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B0520E-C122-41BB-98E0-130A3D851DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B0520E-C122-41BB-98E0-130A3D851DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B0520E-C122-41BB-98E0-130A3D851DF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4CE67D-B056-458B-844B-7CF48CB08324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4CE67D-B056-458B-844B-7CF48CB08324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4CE67D-B056-458B-844B-7CF48CB08324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4CE67D-B056-458B-844B-7CF48CB08324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC9A8F1-B323-47F2-A458-483C0369820F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC9A8F1-B323-47F2-A458-483C0369820F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC9A8F1-B323-47F2-A458-483C0369820F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC9A8F1-B323-47F2-A458-483C0369820F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06FF4BCF-6DC4-4674-8911-6D4A7CE9DCD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06FF4BCF-6DC4-4674-8911-6D4A7CE9DCD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06FF4BCF-6DC4-4674-8911-6D4A7CE9DCD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06FF4BCF-6DC4-4674-8911-6D4A7CE9DCD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
