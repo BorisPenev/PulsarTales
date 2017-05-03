@@ -9,6 +9,6 @@ namespace PulsarTales.Services
 
             this.DbContext = new PulsarTalesContext();
         }
-        public PulsarTalesContext DbContext { get; }
+        public PulsarTalesContext DbContext { get; private set; }
     }
 }
