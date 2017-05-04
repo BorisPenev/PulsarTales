@@ -19,6 +19,7 @@ namespace PulsarTales.Web
     {
         public Task SendAsync(IdentityMessage message)
         {
+            
             // Plug in your email service here to send an email.
             return Task.FromResult(0);
         }
@@ -55,10 +56,10 @@ namespace PulsarTales.Web
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults

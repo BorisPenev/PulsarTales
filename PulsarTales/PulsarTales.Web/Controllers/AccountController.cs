@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -10,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PulsarTales.Models.Entities;
 using PulsarTales.Models.ViewModels.Account;
+using PulsarTales.Web.Helpers;
 
 namespace PulsarTales.Web.Controllers
 {
@@ -152,17 +154,39 @@ namespace PulsarTales.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Comments = new HashSet<Comment>(),
+                    Bookmarks = new HashSet<Chapter>(),
+                    Novels = new HashSet<Novel>(),
+                    RegistrationDate = DateTime.Now,
+                };
+
+                var addRoleResult = UserManager.AddToRole(user.Id, "User");
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Thanks for Registering your account.<br>Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                GMailer.GmailUsername = "pulsartalesoriginal@gmail.com";
+                GMailer.GmailPassword = "pulsartales123";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = $"{user.Email}";
+                mailer.Subject = "Verify your email id";
+                mailer.Body = "Thanks for Registering your account.<br> please verify your account by clicking the link <br> <a href=\"" + callbackUrl + "\">here</a>";
+                mailer.IsHtml = true;
+                mailer.Send();
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
                 }
