@@ -34,6 +34,42 @@ namespace PulsarTales.Data
                 x.MapRightKey("GenreId");
                 x.ToTable("NovelGenres");
             });
+            modelBuilder.Entity<Novel>()
+            .HasMany(n => n.Translators)
+            .WithMany()
+            .Map(x =>
+            {
+                x.MapLeftKey("NovelId");
+                x.MapRightKey("TranslatorId");
+                x.ToTable("NovelTranslators");
+            });
+            modelBuilder.Entity<Novel>()
+            .HasMany(n => n.Editors)
+            .WithMany()
+            .Map(x =>
+            {
+                x.MapLeftKey("NovelId");
+                x.MapRightKey("EditorId");
+                x.ToTable("NovelEditors");
+            });
+            modelBuilder.Entity<Novel>()
+            .HasMany(n => n.Writers)
+            .WithMany()
+            .Map(x =>
+            {
+                x.MapLeftKey("NovelId");
+                x.MapRightKey("WriterId");
+                x.ToTable("NovelWriters");
+            });
+            modelBuilder.Entity<Novel>()
+            .HasMany(a => a.TranslationCheckers)
+            .WithMany()
+            .Map(x =>
+            {
+                x.MapLeftKey("NovelId");
+                x.MapRightKey("TranslationCheckerId");
+                x.ToTable("NovelTranslationCheckers");
+            });
             modelBuilder.Entity<Announsment>()
             .HasMany(a => a.Comments)
             .WithMany()
@@ -52,6 +88,7 @@ namespace PulsarTales.Data
                 x.MapRightKey("CommentId");
                 x.ToTable("ChapterComments");
             });
+            
             base.OnModelCreating(modelBuilder);
         }
         public static PulsarTalesContext Create()

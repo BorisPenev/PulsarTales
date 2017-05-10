@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Web;
-using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using PulsarTales.Models.Entities;
 using PulsarTales.Models.ViewModels.Areas.Admin;
@@ -15,6 +10,7 @@ using PulsarTales.Services.Areas.Admin;
 
 namespace PulsarTales.Web.Areas.Admin.Controllers
 {
+    [RoutePrefix("user")]
     public class UserController : Controller
     {
         private UserService service;
@@ -24,12 +20,14 @@ namespace PulsarTales.Web.Areas.Admin.Controllers
             this.service = new UserService();
         }
         // GET: User
+
         public ActionResult Index()
         {
             return RedirectToAction("List");
         }
 
         // GET: User/List
+
         public ActionResult List()
         {
             var users = this.service.GetAllUsers();
@@ -82,7 +80,7 @@ namespace PulsarTales.Web.Areas.Admin.Controllers
         }
 
         // POST: User/Edit
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Edit(string id, EditUserViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -105,7 +103,7 @@ namespace PulsarTales.Web.Areas.Admin.Controllers
                 }
                 // Set user properties
                 user.Email = viewModel.User.Email;
-                user.UserName = viewModel.User.Email;
+                user.UserName = viewModel.User.UserName;
                 var userManager = HttpContext.GetOwinContext()
                                         .GetUserManager<ApplicationUserManager>();
 
@@ -152,8 +150,8 @@ namespace PulsarTales.Web.Areas.Admin.Controllers
         }
 
         // POST: User/Delete
-        [HttpPost]
-        [ActionName("Delete")]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.ActionName("Delete")]
         public ActionResult DeleteConfirmed(string id)
         {
             if (id == null)

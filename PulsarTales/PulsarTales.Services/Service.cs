@@ -1,4 +1,5 @@
-﻿using PulsarTales.Data;
+﻿using AutoMapper;
+using PulsarTales.Data;
 
 namespace PulsarTales.Services
 {
@@ -6,7 +7,6 @@ namespace PulsarTales.Services
     {
         protected Service()
         {
-
             this.DbContext = new PulsarTalesContext();
         }
         public PulsarTalesContext DbContext { get; private set; }

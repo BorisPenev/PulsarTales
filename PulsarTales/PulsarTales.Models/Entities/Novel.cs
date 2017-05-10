@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PulsarTales.Models.Entities
 {
@@ -37,22 +38,20 @@ namespace PulsarTales.Models.Entities
         [Required]
         public bool IsOtherTale { get; set; }
 
-        public string Url => this.GetNovelUrl(); 
-
-
+        public string CoverImageUrl { get; set; }
+        public string Url { get; set; } 
+        public bool IsDeleted { get; set; }
         public virtual ICollection<Chapter> Chapters { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
-
+        [InverseProperty("TranslatedNovels")]
         public virtual ICollection<ApplicationUser> Translators { get; set; }
+        [InverseProperty("EditedNovels")]
         public virtual ICollection<ApplicationUser> Editors { get; set; }
+        [InverseProperty("CheckedTranslatedNovels")]
         public virtual ICollection<ApplicationUser> TranslationCheckers { get; set; }
+        [InverseProperty("WrittenNovels")]
         public virtual ICollection<ApplicationUser> Writers { get; set; }
 
-        private string GetNovelUrl()
-        {
-            string escapedTitle = this.TitleEnglish.Replace("!", "").Replace(" ", "-").Replace("'", "").Replace(".", "");
-
-            return escapedTitle;
-        }
+        
     }
 }

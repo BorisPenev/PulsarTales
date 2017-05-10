@@ -17,9 +17,12 @@ namespace PulsarTales.Models.Entities
         public string Name { get; set; }
 
         public DateTime? DateAdded { get; set; }
+        public bool IsDeleted { get; set; }
+
         [ForeignKey("User")]
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
         public virtual ApplicationUser User { get; set; }
+        [InverseProperty("Genres")]
         public virtual ICollection<Novel> Novels { get; set; }
     }
 }

@@ -1,0 +1,51 @@
+﻿@using PulsarTales.Models.ViewModels.Home
+@model MenuViewModel
+    
+
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Translated Tales <span class="caret"></span></a>
+    <ul class="dropdown-menu multi-column columns-2">
+        <li class="col-sm-6 column">
+            <ul class="multi-column-dropdown">
+                @for (int i = 0; i < Model.TranslatedTales.Count / 2; i++)
+                {
+                    <li>@Html.ActionLink(Model.TranslatedTales[i].Title, "Details", "Novels", new { novelUrl = Model.TranslatedTales[i].Url }, null)</li>
+                }
+                @*@foreach (var item in Model.TranslatedTales)
+                {
+                    <li><a href="/novel/@item.Url">@item.Title</a></li>
+                    
+                }*@
+            </ul>
+        </li>
+        <li class="col-sm-6 column">
+            <ul class="multi-column-dropdown">
+               @for (int i = Model.TranslatedTales.Count / 2; i < Model.TranslatedTales.Count; i++)
+               {
+                <li>@Html.ActionLink(Model.TranslatedTales[i].Title, "Details", "Novels", new { novelUrl = Model.TranslatedTales[i].Url }, null)</li>
+               }
+            </ul>
+        </li>
+    </ul>
+</li>
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Original Tales <span class="caret"></span></a>
+    <ul class="dropdown-menu ">
+        @foreach (var item in Model.OriginalTales)
+        {
+            <li><a href="/novel/@item.Url">@item.Title</a></li>
+            <li>@Html.ActionLink(item.Title, "Details", "Novels", new { novelUrl = item.Url }, null)</li>
+        }
+    </ul>
+</li>
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other Tales <span class="caret"></span></a>
+    <ul class="dropdown-menu ">
+        @foreach (var item in Model.OtherTales)
+        {
+            <li><a href="/novel/@item.Url">@item.Title</a></li>
+            <li>@Html.ActionLink(item.Title, "Details", "Novels", new { novelUrl = item.Url }, null)</li>
+        }
+    </ul>
+</li>
+

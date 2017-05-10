@@ -156,11 +156,10 @@ namespace PulsarTales.Web.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email,
                     Comments = new HashSet<Comment>(),
-                    Bookmarks = new HashSet<Chapter>(),
-                    Novels = new HashSet<Novel>(),
+                    TranslatedNovels = new HashSet<Novel>(),
                     RegistrationDate = DateTime.Now,
                 };
 
@@ -236,10 +235,21 @@ namespace PulsarTales.Web.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                GMailer.GmailUsername = "pulsartalesoriginal@gmail.com";
+                GMailer.GmailPassword = "pulsartales123";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = $"{user.Email}";
+                mailer.Subject = "Reset Password";
+                mailer.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
+                mailer.IsHtml = true;
+                mailer.Send();
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -392,7 +402,7 @@ namespace PulsarTales.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

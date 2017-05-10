@@ -97,6 +97,18 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -158,6 +170,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -196,6 +212,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -204,6 +221,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\NovelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,10 +231,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-slate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -233,10 +256,120 @@
     <Content Include="Areas\Admin\Views\User\List.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="pulsarBG.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\froala-editor\css\froala_editor.css" />
+    <Content Include="Scripts\froala-editor\css\froala_editor.min.css" />
+    <Content Include="Scripts\froala-editor\css\froala_editor.pkgd.css" />
+    <Content Include="Scripts\froala-editor\css\froala_editor.pkgd.min.css" />
+    <Content Include="Scripts\froala-editor\css\froala_style.css" />
+    <Content Include="Scripts\froala-editor\css\froala_style.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\char_counter.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\char_counter.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\code_view.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\code_view.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\colors.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\colors.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\draggable.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\draggable.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\emoticons.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\emoticons.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\file.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\file.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\fullscreen.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\fullscreen.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\image.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\image.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\image_manager.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\image_manager.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\line_breaker.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\line_breaker.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\quick_insert.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\quick_insert.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\table.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\table.min.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\video.css" />
+    <Content Include="Scripts\froala-editor\css\plugins\video.min.css" />
+    <Content Include="Scripts\froala-editor\css\themes\dark.css" />
+    <Content Include="Scripts\froala-editor\css\themes\dark.min.css" />
+    <Content Include="Scripts\froala-editor\css\themes\gray.css" />
+    <Content Include="Scripts\froala-editor\css\themes\gray.min.css" />
+    <Content Include="Scripts\froala-editor\css\themes\red.css" />
+    <Content Include="Scripts\froala-editor\css\themes\red.min.css" />
+    <Content Include="Scripts\froala-editor\css\themes\royal.css" />
+    <Content Include="Scripts\froala-editor\css\themes\royal.min.css" />
+    <Content Include="Scripts\froala-editor\img\photo1.jpg" />
+    <Content Include="Scripts\froala-editor\js\froala_editor.min.js" />
+    <Content Include="Scripts\froala-editor\js\froala_editor.pkgd.min.js" />
+    <Content Include="Scripts\froala-editor\js\languages\ar.js" />
+    <Content Include="Scripts\froala-editor\js\languages\bs.js" />
+    <Content Include="Scripts\froala-editor\js\languages\cs.js" />
+    <Content Include="Scripts\froala-editor\js\languages\da.js" />
+    <Content Include="Scripts\froala-editor\js\languages\de.js" />
+    <Content Include="Scripts\froala-editor\js\languages\en_ca.js" />
+    <Content Include="Scripts\froala-editor\js\languages\en_gb.js" />
+    <Content Include="Scripts\froala-editor\js\languages\es.js" />
+    <Content Include="Scripts\froala-editor\js\languages\et.js" />
+    <Content Include="Scripts\froala-editor\js\languages\fa.js" />
+    <Content Include="Scripts\froala-editor\js\languages\fi.js" />
+    <Content Include="Scripts\froala-editor\js\languages\fr.js" />
+    <Content Include="Scripts\froala-editor\js\languages\he.js" />
+    <Content Include="Scripts\froala-editor\js\languages\hr.js" />
+    <Content Include="Scripts\froala-editor\js\languages\hu.js" />
+    <Content Include="Scripts\froala-editor\js\languages\id.js" />
+    <Content Include="Scripts\froala-editor\js\languages\it.js" />
+    <Content Include="Scripts\froala-editor\js\languages\ja.js" />
+    <Content Include="Scripts\froala-editor\js\languages\ko.js" />
+    <Content Include="Scripts\froala-editor\js\languages\me.js" />
+    <Content Include="Scripts\froala-editor\js\languages\nb.js" />
+    <Content Include="Scripts\froala-editor\js\languages\nl.js" />
+    <Content Include="Scripts\froala-editor\js\languages\pl.js" />
+    <Content Include="Scripts\froala-editor\js\languages\pt_br.js" />
+    <Content Include="Scripts\froala-editor\js\languages\pt_pt.js" />
+    <Content Include="Scripts\froala-editor\js\languages\ro.js" />
+    <Content Include="Scripts\froala-editor\js\languages\ru.js" />
+    <Content Include="Scripts\froala-editor\js\languages\sr.js" />
+    <Content Include="Scripts\froala-editor\js\languages\sv.js" />
+    <Content Include="Scripts\froala-editor\js\languages\th.js" />
+    <Content Include="Scripts\froala-editor\js\languages\tr.js" />
+    <Content Include="Scripts\froala-editor\js\languages\ua.js" />
+    <Content Include="Scripts\froala-editor\js\languages\vi.js" />
+    <Content Include="Scripts\froala-editor\js\languages\zh_cn.js" />
+    <Content Include="Scripts\froala-editor\js\languages\zh_tw.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\align.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\char_counter.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\code_beautifier.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\code_view.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\colors.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\draggable.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\emoticons.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\entities.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\file.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\font_family.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\font_size.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\forms.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\fullscreen.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\image.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\image_manager.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\inline_style.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\line_breaker.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\link.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\lists.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\paragraph_format.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\paragraph_style.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\quick_insert.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\quote.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\save.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\table.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\url.min.js" />
+    <Content Include="Scripts\froala-editor\js\plugins\video.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -287,6 +420,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\_MenuPartial.cshtml" />
+    <Content Include="Views\Novels\Details.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\Novels\ChapterDetails.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PulsarTales.Data\PulsarTales.Data.csproj">

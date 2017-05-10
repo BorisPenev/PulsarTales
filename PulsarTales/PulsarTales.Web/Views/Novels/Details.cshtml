@@ -1,0 +1,39 @@
+﻿@model PulsarTales.Models.ViewModels.Novels.NovelDetailsViewModel
+
+<div>
+    <h2>@Model.TitleEnglish</h2>
+    @if (!User.IsInRole("User"))
+    {
+        <p class="btn btn-lg btn-warning">
+            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+        </p>
+    }
+    <hr />
+
+    <div>
+        <div id="coverImg" style="background-image: url(@Model.CoverImageUrl);"></div>
+        <div class="desc">
+            <p><strong>Genres:</strong><br /> @Model.Genres</p>
+            <p><p><strong>Author:</strong> <span style="font-weight: 400">@Model.AuthorEnglishName</span> | <span style="font-weight: 400">@Model.AuthorNameInOriginalLanguage </span></p>
+            <p><strong>Status:</strong> @Model.Chapters.Count() chapters (@Model.Status)</p>
+            <p><strong>Translator:</strong> @Model.TranslatorName</p>
+            <hr>
+            <p><strong>Synopsis:&nbsp;</strong>@Model.Description</p>
+        </div>
+    </div>
+    <hr />
+    <div class="clearfix"></div>
+    <div id="chapters">
+        <p>Chapters: </p>
+        @foreach (var chapter in Model.Chapters)
+        {
+            <p class="panel-title col-xs-12">
+                @*@Html.ActionLink($"Chapter {chapter.Number}: {chapter.Title}", "ChapterDetails", "Novels",
+                    new {chapterlUrl = chapter.UrlSuffix, novelUrl = Model.Url}, null)*@
+                @Html.ActionLink(chapter.Title, "ChapterDetails", "Novels", new { novelUrl = Model.Url, chapterUrl = chapter.UrlSuffix }, null)
+            </p>
+        }
+    </div>
+</div>
+
+

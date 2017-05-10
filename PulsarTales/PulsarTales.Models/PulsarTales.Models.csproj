@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingModels\Areas\Admin\EditUserBindingModel.cs" />
+    <Compile Include="BindingModels\News\EditBindingModel.cs" />
     <Compile Include="Entities\Announsment.cs" />
     <Compile Include="Entities\ApplicationUser .cs" />
     <Compile Include="Entities\Chapter.cs" />
@@ -106,6 +107,13 @@
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\Areas\Admin\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\Home\AnnounsmentDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Home\CommentViewModel.cs" />
+    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\LatestAnnounsmentsViewModel.cs" />
+    <Compile Include="ViewModels\Home\LatestChapterUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Home\MenuViewModel.cs" />
+    <Compile Include="ViewModels\Home\TaleViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
@@ -121,10 +129,14 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="BindingModels\News\CreateBindingModel.cs" />
+    <Compile Include="ViewModels\Novels\NovelDetailsChapterViewModel.cs" />
+    <Compile Include="ViewModels\Novels\NovelDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BindingModels\Account\" />
     <Folder Include="BindingModels\Manage\" />
+    <Folder Include="ViewModels\News\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,12 +1,90 @@
-﻿@{
+﻿@using PulsarTales.Models.ViewModels.Home
+@model IndexViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
+@*<style type="text/css">
+        .froala-element {
+            font-family: tahoma;
+            font-size: 9pt;
+        }
+    </style>*@
 <div class="jumbotron">
-    <h1>Pulsar Tales</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <h2 class="text-center">Latest Announcements</h2>
+    @foreach (var ann in Model.Announcements)
+    {
+        <div class="announcements panel panel-default">
+            <div class="panel-heading row">
+                <h3 class="panel-title col-xs-6 col-sm-8 col-md-9">@Html.ActionLink(ann.Title, "Details", "News", new { id = ann.Id }, null)</h3>
+                <h3 class="panel-title col-xs-6 col-sm-4 col-md-3"><em class="time">@ann.DateAnnounced</em></h3>
+            </div>
+        </div>
+    }
+    @*@using (Html.BeginForm(actionName: "Index", controllerName: "Home"))
+        {
+            @Html.TextArea(name: "Editor1")
+            <input type="submit" value="Save" />
+        }*@
+    <h2 class="text-center">Latest Updates</h2>
+    <div class="panel panel-default latest-chapter">
 
-<div class="row">
-</div>
+        <div class="panel-heading row">
+            <h3 class="panel-title col-xs-6 col-sm-5 col-md-6"><strong>Series</strong></h3>
+            <h3 class="panel-title col-xs-6 col-sm-3 col-md-3">Chapter</h3>
+            <h3 class="panel-title col-xs-6 col-sm-4 col-md-3 hidden-xs"><em>Time</em></h3>
+        </div>
+
+        <div class="panel-body">
+            @foreach (var ann in Model.LatestChapterUpdates)
+            {
+                <div class="chapter row">
+                    <p class="panel-title col-xs-6 col-sm-5 col-md-6">@Html.ActionLink(ann.NovelTitle, "Details", "Novels", new { novelUrl = ann.NovelUrl }, null)</p>
+                    <p class="panel-title col-xs-6 col-sm-3 col-md-3">@Html.ActionLink(ann.ChapterTitle, "ChapterDetails", "Novels", new { novelUrl = ann.NovelUrl, chapterUrl = ann.ChapterUrl }, null)</p>
+                    <p class="panel-title col-xs-6 col-sm-4 col-md-3 time hidden-xs">@ann.DateAdded</p>
+                </div>
+            }
+        </div>
+
+       </div>
+
+
+        @section Scripts
+{
+            <script type="text/javascript">
+                $(function () {
+                    $('#Editor1').froalaEditor({
+                        toolbarButtons: ['fontFamily', '|', 'fontSize', '|', '|', 'bold', 'italic', 'underline', 'undo', 'redo', 'html', 'align'],
+                        fontFamilySelection: true,
+                        fontSizeSelection: true,
+                        paragraphFormatSelection: true,
+                        theme: 'gray',
+                        zIndex: 2001
+                        @*buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily",
+                    "fontSize", "color", "formatBlock", "align", "insertOrderedList",
+                    "insertUnorderedList", "outdent", "indent", "selectAll", "createLink",
+                    "insertImage", "insertVideo", "undo", "redo", "html", "save", "inserthorizontalrule"],
+                inlineMode: false,
+                inverseSkin: true,
+                preloaderSrc: '@Url.Content("~/Content/img/preloader.gif")',
+                allowedImageTypes: ["jpeg", "jpg", "png"],
+                height: 300,
+                language: "en-gb",
+                direction: "ltr",
+                fontList: ["Tahoma, Geneva", "Arial, Helvetica", "Impact, Charcoal"],
+                autosave: true,
+                autosaveInterval: 2500,
+                saveURL: '@Url.Action("FroalaAutoSave", "Home")',
+                saveParams: { postId: "123" },
+                spellcheck: true,
+                plainPaste: true,
+                imageButtons: ["removeImage", "replaceImage", "linkImage"],
+                borderColor: '#00008b',
+                //imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
+                imageParams: { postId: "123" },
+                enableScript: false*@
+                    });
+                });
+            </script>
+        }

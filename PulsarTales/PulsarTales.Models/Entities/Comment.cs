@@ -12,6 +12,8 @@ namespace PulsarTales.Models.Entities
         public int Id { get; set; }
         public string Message { get; set; }
         public DateTime? DateCommented { get; set; }
+        public bool IsDeleted { get; set; }
+
         [ForeignKey("User")]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
